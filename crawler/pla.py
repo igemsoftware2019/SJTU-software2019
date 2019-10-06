@@ -5,7 +5,7 @@ import re
 import json
 import pandas
 
-file_name="/Users/sion/url2.csv"
+file_name="/Users/url2.csv"
 f=open(file_name,"r")
 next(f)
 
@@ -19,16 +19,16 @@ def parseListLinks(url):
     return re1
     
 for line in f:
-    enzyme_link=line
-    print(enzyme_link)
+    link=line
+    print(link)
 
-    if enzyme_link in web_list:
+    if link in web_list:
         pass
     else:
         web_list.append(enzyme_link)
 
         #to get the html
-        request=urllib.request.Request(enzyme_link)
+        request=urllib.request.Request(link)
         response=urllib.request.urlopen(request)
         content=response.read().decode('utf-8')
 
