@@ -4,7 +4,7 @@ from datetime import datetime
 import re
 import json
 import pandas
-file_name="/Users/sion/url.csv"
+file_name="/Users/url.csv"
 news_total=[]
 
 f=open(file_name,"r")
@@ -23,8 +23,8 @@ for line in f:
 print('抓取结束')                                 
 file= open("/Users/sion/url2.csv","w")
 for i in range(len(news_total)):
-        s = str(news_total[i]).replace('[','').replace(']','')#去除[],这两行按数据不同，可以选择
-        s = s.replace("'",'').replace(',','') +'\n'   #去除单引号，逗号，每行末尾追加换行符
+        s = str(news_total[i]).replace('[','').replace(']','')
+        s = s.replace("'",'').replace(',','') +'\n'   
         file.write(s)
 file.close()
 print('odk')  
