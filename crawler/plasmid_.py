@@ -1,11 +1,12 @@
-import os,re,urllib,random
-import urllib.request
+import os,re
+import urllib
 from bs4 import BeautifulSoup
 import lxml
 import requests
-file_name="/Users/sion/url_fin.csv"
-out_file_total="plasmid_3.csv"
-#define the function that can save the information
+
+file_name="/Users/url_fin.csv"
+out_file_total="plasmid.csv"
+
 def out_put_file(out_file,name,PURPOSE,DP_LAB,LAB_link,pub,pub_link,seq_link,BB_vector,BB_manu,BB_size,Vector_size,Vector_type,Mod2BB,Bac_Re,Temp,Strain,Copy_nu,insert_name,insert_type,insert_size,Prom,mutation,tag,pe5,pe3,Document_url,Document,License,License_url,Cite,Cite_url,Cite_it1,Cite_it2):
     out_f=open(out_file,"a")
     out_f.write(name+",,"+PURPOSE+",,"+DP_LAB+",,"+LAB_link+",,"+pub+",,"+pub_link+",,"+seq_link+",,"+BB_vector+",,"+BB_manu+",,"+BB_size+",,"+Vector_size+",,"+Vector_type+",,"+Mod2BB+",,"+Bac_Re+",,"+Temp+",,"+Strain+",,"+Copy_nu+",,"+insert_name+",,"+insert_type+",,"+insert_size+",,"+Prom+",,"+mutation+",,"+tag+",,"+pe5+",,"+pe3+",,"+Document_url+",,"+Document+",,"+License+",,"+License_url+",,"+Cite+",,"+Cite_url+",,"+Cite_it1+",,"+Cite_it2+"\n")
