@@ -15,7 +15,7 @@ pattern=re.compile('<option value="(.*?)">.*?</option>',re.S)
 items3=re.findall(pattern,content)
 #print('原核生物：')
 for i in items3:
-    print(i)
+    #print(i)
     temp1='http://rest.kegg.jp/get/'+i+'00720/kgml'
     pro.append(temp1)
     #print(temp1)#储存原核生物的固氮物种kgml的网址
@@ -28,7 +28,7 @@ pattern=re.compile('<option value="(.*?)">.*?</option>',re.S)
 items4=re.findall(pattern,content)
 #print('固氮器官：')
 for i in items4:
-    print(i)
+    #print(i)
     temp2='http://rest.kegg.jp/get/'+i+'00710/kgml'
     euk.append(temp2)
     #print(temp2)#储存相关固氮器官的kgml的网址
@@ -43,7 +43,7 @@ from requests_html import HTMLSession
 #modify another url if you need
 #url="http://rest.kegg.jp/get/mox00710/kgml"
 
-
+url=url[0:2:]
 for url in all:
     session = HTMLSession()
     r = session.get(url)
