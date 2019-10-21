@@ -1,0 +1,1 @@
+The folder mainly contains the script that we use to modify our sql script.
