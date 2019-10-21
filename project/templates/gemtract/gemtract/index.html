@@ -1,0 +1,97 @@
+{% extends "gemtract/gemtract/skeleton.html" %}
+{% block gemtract %}
+
+<h1>Step 1: Select a model</h1>
+
+<p>
+To start your analysis you need to select a model.
+You can either choose a model from a public repository or upload your own model:
+</p>
+
+<div class="w3-bar  w3-white w3-border">
+  <div class="w3-bar-item w3-hide-small">Choose Method:</div>
+  <button id="choose-public-model-tab" class="w3-bar-item w3-button" onclick="tab('choose-public-model', 'choose-public-model-tab')">Public Model</button>
+  <button id="upload-model-tab" class="w3-bar-item w3-button" onclick="tab('upload-model', 'upload-model-tab')">Upload Model</button>
+</div>
+<div id="error" class="w3-container w3-red w3-padding"></div>
+
+<div class="w3-margin">
+  <div id="choose-public-model" style="display:none" class="">
+    <p>We currently support the following databases:</p>
+    <div class="w3-bar  w3-white w3-border">
+      <div class="w3-bar-item w3-hide-small">Choose Database:</div>
+      <button id="choose-public-model-bigg-tab" class="w3-bar-item w3-button" onclick="tab('choose-bigg', 'choose-public-model-bigg-tab')">BiGG</button>
+      <button id="choose-public-model-biomodels-tab" class="w3-bar-item w3-button" onclick="tab('choose-biomodels', 'choose-public-model-biomodels-tab')">Biomodels</button>
+    </div>
+    <div>
+      <div id="choose-bigg" style="display:none" class="">
+        <p>
+          The following table lists the models from <a href="http://bigg.ucsd.edu/">BiGG Models</a> &mdash; you can use them for educational, research and non-profit purposes, without fee.
+          Please consult the <a href="http://bigg.ucsd.edu/license#license">BiGG License</a> for more information and cite them where appropriate.
+        </p>
+        <div id="bigg_loading"><i class="fa fa-spinner w3-spin"></i> loading network</div>
+        <table class="w3-table w3-striped sortable" style="display:none">
+           <thead>
+             <tr>
+               <th>ID <i class='fas fa-sort'></i></th>
+               <th>Organism <i class='fas fa-sort'></i></th>
+               <th>Metabolites <i class='fas fa-sort'></i></th>
+               <th>Reactions <i class='fas fa-sort'></i></th>
+               <th>Genes <i class='fas fa-sort'></i></th>
+             </tr>
+           </thead>
+           <tbody id="bigg-table"></tbody>
+        </table>
+      </div>
+      <div id="choose-biomodels" style="display:none" class="">
+        <p>
+          Here you can select a model from <a href="https://www.ebi.ac.uk/biomodels/">Biomodels</a> to start your analysis &mdash; their models are dedicated to the public domain.
+          Please consult the <a href="https://www.ebi.ac.uk/biomodels/termsofuse">Biomodels' Terms of Use</a> for more information and cite them where appropriate.
+        </p>
+        <div class="w3-row">
+          <div class="w3-threequarter">
+            <input type="text" name="biomodelsid" id="biomodelsid" placeholder="model id (BIOMD.... or MODEL...)" class="w3-input w3-flat-clouds" >
+          </div>
+          <div class="w3-quarter">
+            <button class="w3-input w3-button w3-flat-silver" id="specific-biomodel"><i class="fa fa-spinner w3-spin" id="specific-biomodel-loading" style="display:none"></i> Obtain Specific Model</button>
+          </div>
+        </div>
+        <p>
+          The following table lists a small subset of the models from Biomodels (<a href="{% url 'gemindex:learn' %}#which-biomodels">which?</a>) to give you a jummp start.
+        </p>
+        <div id="biomodels_loading"><i class="fa fa-spinner w3-spin"></i> loading network</div>
+        <table class="w3-table w3-striped sortable" style="display:none">
+           <thead>
+             <tr>
+               <th>ID <i class='fas fa-sort'></i></th>
+               <th>Name <i class='fas fa-sort'></i></th>
+             </tr>
+           </thead>
+           <tbody id="biomodels-table"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="upload-model" style="display:none" class="">
+    <p>Upload a custom model from your system:</p>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label for="custom-model" id="upload-label" class="w3-button w3-flat-clouds">
+        <span id="upload-caption">Click to select a file for Upload:</span>
+        <strong><span id="upload-name">none selected</span></strong>
+      </label>
+      <input type="file" name="custom-model" id="custom-model">
+    <button type="submit" class="w3-button w3-flat-silver">Upload</button>
+    </form>
+  </div>
+</div>
+
+
+<script>
+  token = '{{ csrf_token }}';
+  filter_url = "{% url 'gemtract:filter' %}";
+  prepareIndex ();
+</script>
+
+
+{% endblock %}

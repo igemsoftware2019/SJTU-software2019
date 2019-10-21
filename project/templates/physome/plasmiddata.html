@@ -1,0 +1,272 @@
+{% load staticfiles %}
+<!Doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>PlasmidData</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <script type="text/javascript" src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-submenu>a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+
+        .dropdown-submenu:hover>a:after {
+            border-left-color: #fff;
+        }
+
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+
+        .dropdown-submenu.pull-left>.dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+		select {
+  border: solid 1px #7f7f7f;
+  padding-top:2px;
+  padding-left:2px;
+  appearance:none;
+  -moz-appearance:none;
+  -webkit-appearance:none;
+  background: url("https://raw.githubusercontent.com/ourjs/static/gh-pages/2015/arrow.png") no-repeat scroll right center transparent;
+  height: 30px;
+  line-height: 30px;
+  border-radius: 5px;
+			
+
+  padding-right: 14px;
+}
+
+
+/*清除ie的默认选择框样式清除，隐藏下拉箭头*/
+select::-ms-expand { display: none; }
+    </style>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-select/css/bootstrap-select.min.css' %}">
+
+    <!--Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <!--owl-carousel css-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.transitions.css' %}">
+    <!-- <link rel="stylesheet" href="css/animations.css"> -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/color1.css' %}">
+    <script src="{% static 'bootstrap/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+    <script src="{% static 'bootstrap/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+</head>
+
+<body id="page-top" class="index" style="padding-top: 0px">
+
+    <!-- Preloader -->
+
+    <header id="home" style="margin-bottom: 40px">
+        <!-- Navigation -->
+        <nav id="mainNav" class="navbar navbar-default-nothone navbar-custom navbar-fixed-top">
+            <div class="container">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav text-center">
+                        <li class="logo-holder">
+                            <a href="index.html">
+                                <img src="{% static 'bootstrap/images/logos/small-logo-light.png' %}" width='100'
+                                    height='35' style="margin-top:-15px"></a>
+                        </li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">DataBase</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'partdata' %}">PartData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'metadata' %}">MetaData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'plasmiddata' %}">Plasmid Data</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'tool1' %}">Smiles-drawer-2D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'tool3' %}">Smiles-drawer-3D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'mod2sbml' %}">mod to sbml</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'gemindex:gemindex' %}">Gemtract</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'prediction' %}">Prediction</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Information</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'species' %}">species</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'partinfo' %}">PartInfo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <br /><br /><br /><br />
+        <div>
+            <h1>
+                <img src="{% static 'bootstrap/images/logos/big-logo.jpg'%}" width='127.4' height='86.9'>
+                <br />
+                <h1>
+                    <font color=black>PHOSYME</font>
+                </h1>
+            </h1>
+        </div>
+        </nav>
+    </header>
+
+    <!--SELECT-->
+    <div class="container">
+        <div class="row">
+            <form role="form" action="{% url 'plasmidsearch' %}" method="post">
+            <div class="form-group">
+                <h3> <font style="margin-left: 15px;">Start your search</font></h3>
+                <hr>
+                <div id="myTabContent" class="tab-content">
+                        <div class="dropdown col-md-2 col-md-offset-3" style="">
+                            </ul>
+                            <select name="selecttype" id="selecttype" > 
+                                <option value="all">all</option>
+                                <option value="name">name</option>
+                                <option value="purpose">purpose</option>
+                                <option value="publication">publication</option>
+                                <option value="insertname">insertname</option>
+                            </select>
+                        </div>
+                        <<div class="col-md-4" style="margin-left: -50px">
+                            <div class="input-group">
+                                <input type="text" class="form-control" name="plasmidsearch" style="width:400px">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="submit" style="border:none;"><span
+                                            class="glyphicon glyphicon-search"></span></button>
+                                </span>
+                            </div><!-- /input-group -->
+                        </div><!-- /.col-lg-6 -->
+                    </div><!-- tab-pane -->
+
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>
+    </div>
+
+    <section id="business" class="business bg-grey roomy-70">
+        <div class="container">
+            <div class="row">
+                <div class="main_business">
+                    <div class="col-md-10">
+                        <div class="business_item sm-m-top-50">
+                            <h3>PlasmidData : A database of Plasmid</h3>
+                            <hr>
+                            <ul style="font-family:Arial">
+                                <li><i class="fa fa-arrow-circle-right"></i> Clean & Modern Design</li>
+                                <li><i class="fa  fa-arrow-circle-right"></i> Fully Responsive</li>
+                                <li><i class="fa  fa-arrow-circle-right"></i> Google Fonts</li>
+                            </ul>
+                            <p class="m-top-20" style="font-family:Arial">Lorem ipsum dolor sit amet, consectetur adipiscing elit pellentesque
+                                eleifend in mi
+                                sit amet mattis suspendisse ac ligula volutpat nisl rhoncus sagittis cras suscipit
+                                lacus quis erat malesuada lobortis eiam dui magna volutpat commodo eget pretium vitae
+                                elit etiam luctus risus urna in malesuada ante convallis.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section><!-- End off Business section -->
+
+    <div class="panel-body no-padding" style="margin-top: 50px;margin-left: 75px;margin-right:75px">
+        <table class="table table-striped">
+            <thead>
+                <tr style="font-family:Arial">
+                    <th>Name</th>
+                    <th>Description</th>
+                    <th>Type</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="font-family:Arial">
+                    <td><a href="#">763648</a></td>
+                    <td>Steve</td>
+                    <td>$122</td>
+                    <td>Oct 21, 2016</td>
+                    <td>COMPLETED</span></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript">
+
+
+        $('.dropdown li a').click(function () {
+
+            console.log(this);
+            title = $(this).attr("data-title");
+            id = $(this).attr("data-index");
+            $("#select-title").text(title);
+            $("#category_id").val(id);
+        })
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".dropdown").mouseover(function () {
+                $(this).addClass("open");
+            });
+
+            $(".dropdown").mouseleave(function () {
+                $(this).removeClass("open");
+            })
+
+        })
+    </script>
+</body>
+
+</html>

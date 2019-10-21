@@ -1,0 +1,167 @@
+{% load static %}
+{# HTML5 declaration #}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!--
+		This page is part of the GEMtractor
+		Copyright (C) 2019 Martin Scharm <https://binfalse.de>
+ 
+		The GEMtractor is free software: you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation, either version 3 of the License, or
+		(at your option) any later version.
+
+		The GEMtractor is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+ 
+		You should have received a copy of the GNU General Public License
+		along with this program. If not, see <http://www.gnu.org/licenses/>.
+		-->
+
+		<title>{% block title %}{% endblock %} | GEMtractor</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<script src="{% static 'gemtractor/js/jquery-3.4.1.min.js' %}"></script>
+		<script src="{% static 'gemtractor/js/main.js' %}"></script>
+		<link rel="stylesheet" href="{% static 'gemtractor/css/w3.css' %}" type="text/css" />
+		<link rel="stylesheet" href="{% static 'gemtractor/css/w3-colors-flat.css' %}" type="text/css" />
+		
+		<link rel="stylesheet" href="{% static 'gemtractor/webfonts/fonts.css' %}" type="text/css" />
+		
+		<link rel="icon" href="{% static 'gemtractor/pics/gemtractor-portrait.png' %}">
+	
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+	<link rel="icon" href="{% static 'bootstrap/images/logos/icon.jpg' %}">
+	
+	<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+
+	<!--Fonts-->
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+		
+	
+
+	<!--owl-carousel css-->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.carousel.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.theme.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.transitions.css' %}">
+	<!--        <link rel="stylesheet"  href="css/animations.css">-->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/color1.css' %}">
+
+	<script src="{% static 'bootstrap/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/main.js' %}"></script>
+
+</head>
+
+<div id="page-top" class="index">
+<div id="home">
+		<!-- Navigation -->
+		<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top" style="background:#ffffff">
+			<div class="container">
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav text-center">
+						<li class="logo-holder">
+							<a href="{% url 'index' %}">
+								<img src="{% static 'bootstrap/images/logos/small-logo-light.png' %}" width='100' height='35' style="margin-top:-15px"></a>
+						</li>
+						<li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">DataBase</a>
+                        	<ul class="dropdown-menu" role="menu">
+                        		<li style="margin-left: 30px"><a href="{% url 'partdata' %}">PartData</a></li>
+                        		<li style="margin-left: 30px"><a href="{% url 'metadata' %}">MetaData</a></li>
+                        		<li style="margin-left: 30px"><a href="{% url 'plasmiddata' %}">Plasmid Data</a></li>
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+                        	<ul class="dropdown-menu" role="menu">
+                        		<li style="margin-left: 30px"><a href="{% url 'tool1' %}">Smiles-drawer-2D</a></li>
+                        		<li style="margin-left: 30px"><a href="{% url 'tool3' %}">Smiles-drawer-3D</a></li>
+                        		<li style="margin-left: 30px"><a href="{% url 'gemindex:gemindex' %}">Gemtract</a></li>
+                        		<li style="margin-left: 30px"><a href="{% url 'prediction' %}">Prediction</a></li>
+								
+							</ul>
+						</li>
+						<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Information</a>
+                        	<ul class="dropdown-menu" role="menu">
+                        		<li style="margin-left: 30px"><a href="{% url 'species' %}">species</a></li>
+                        		<li style="margin-left: 30px"><a href="{% url 'partinfo' %}">PartInfo</a></li>
+							</ul>
+						</li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+		</div></div>
+	
+<body class="w3-flat-clouds" >
+
+		<div class="w3-content maincontent"">
+		<div style="width:100%" style="border:1px dashed #000"><br/><br/><br/></div>
+        <a href="{% url 'gemindex:gemindex' %}" class="w3-bar-item w3-button w3-padding-large">
+						<img src="{% static 'pics/gemtractor-landscape.png' %}" title="GEMtractor" alt="GEMtractor"/>
+		</a>
+		<a href="{% url 'gemtract:gemindex' %}" class=" w3-bar-item w3-button w3-padding-large w3-hide-small" style="z-index:3">Start</a>
+			<div class="w3-container w3-content w3-white w3-padding-64 w3-margin-top w3-card" id="maincard">
+				{% block content %}{% endblock %}
+			</div>
+			{% if PREV_l %}
+			<div class="prev"><a href="{{PREV_l}}"><strong>{{PREV_s}}</strong><br>{{PREV_t}}</a></div>
+			{% endif %}
+			{% if NEXT_l %}
+			<div class="next"><a href="{{NEXT_l}}"><strong>{{NEXT_s}}</strong><br>{{NEXT_t}}</a></div>
+			{% endif %}
+		</div>
+		
+		<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-xlarge">
+			<p class="w3-medium">The <a href="{% url 'gemindex:imprint' %}#imprint">GEMtractor</a> is a Project of the <a href="https://www.sbi.uni-rostock.de/">Department of Systems Biology and Bioinformatics</a> at the <a href="http://www.uni-rostock.de/">University of Rostock</a></p>
+		</footer>
+	</body>
+	
+
+	<!-- jQuery -->
+	<script src="{% static 'bootstrap/js/vendor/jquery.js' %}"></script>
+
+	<!-- Bootstrap Core JavaScript -->
+	<script src="{% static 'bootstrap/js/vendor/bootstrap.min.js' %}"></script>
+
+	<!-- Plugin JavaScript -->
+	<script src="{% static 'bootstrap/js/vendor/jquery.easing.min.js' %}"></script>
+
+	<!-- Contact Form JavaScript -->
+	<script src="{% static 'bootstrap/js/vendor/jqBootstrapValidation.js' %}"></script>
+	<script src="{% static 'bootstrap/js/vendor/contact_me.js' %}"></script>
+	<script src="{% static 'bootstrap/js/vendor/owl.carousel.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/vendor/prettify.js' %}"></script>
+	<script src="{% static 'bootstrap/js/vendor/css3-animate-it.js' %}"></script>
+
+	<!-- Theme JavaScript -->
+	<script src="{% static 'bootstrap/js/vendor/agency.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/vendor/jquery.mixitup.js' %}"></script>
+	<script src="{% static 'bootstrap/js/vendor/wow.min.js' %}"></script>
+	<!--<script src="http://maps.google.com/maps/api/js?sensor=false"></script>
+<script src="js/vendor/gmaps.js"></script>-->
+
+	<script src="{% static 'bootstrap/js/main.js' %}"></script>
+	<script src="{% static 'bootstrap/js/script.js' %}"></script>
+	<script type="text/javascript">
+		$(function () {
+		    $(".dropdown").mouseover(function () {
+		        $(this).addClass("open");
+		    });
+
+		    $(".dropdown").mouseleave(function(){
+		        $(this).removeClass("open");
+		    })
+
+			})
+	</script>
+</html>

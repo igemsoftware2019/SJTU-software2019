@@ -1,0 +1,242 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>PlasmidInfo</title>
+        <script src="{% static 'bootstrap/js/vendor/jquery.js' %}"></script>
+        
+        <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+        <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+        
+        <script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+        <script src="{% static 'bootstrap/bootstrap-table/bootstrap-table.js' %}"></script>
+        <link href="{% static 'bootstrap/bootstrap-table/bootstrap-table.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <header id="home" class="intro-text main-banner" >
+        <!-- Navigation -->
+        <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+            <div class="container">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav text-center">
+                        <li class="logo-holder">
+                            <a href="{% url 'index' %}">
+                                <img src="{% static 'bootstrap/images/logos/small-logo-light.png' %}" width='100' height='35' style="margin-top:-15px"></a>
+                        </li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">DataBase</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'partdata' %}">PartData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'metadata' %}">MetaData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'plasmiddata' %}">Plasmid Data</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'tool1' %}">Smiles-drawer-2D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'tool3' %}">Smiles-drawer-3D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'mod2sbml' %}">mod to sbml</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'gemindex:gemindex' %}">Gemtract</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'prediction' %}">Prediction</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Information</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'species' %}">species</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'partinfo' %}">PartInfo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+        <div class="panel-body no-padding" style="margin-top: 50px;margin-left: 100px;margin-right:200px ">
+            <table class="table table-striped table-condensed table-bordered" id="table" style="table-layout:fixed;word-break:break-all; word-wrap:break-all;text-align: center">
+                <tbody id="tbody">
+                    <caption style="font-size:16px">Result</caption>
+                    <tr>
+                        <td stype="width:20%">ID</td>
+                        <td style="width:80%" id="id"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Name</td>
+                        <td style="width:80%" id="name"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Purpose</td>
+                        <td style="width:80%" id="purpose"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Depositing Lab</td>
+                        <td style="width:80%" id="dplab"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Lab-link</td>
+                        <td style="width:80%" id="lablink"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Publication</td>
+                        <td style="width:80%" id="pub"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Publication Link</td>
+                        <td style="width:80%" id="publink"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Sequence link</td>
+                        <td style="width:80%" id="seqlink"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Vector backbone</td>
+                        <td style="width:80%" id="bbvector"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Backbone manufacturer</td>
+                        <td style="width:80%" id="bbmanu"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Backbone size w/o insert (bp)</td>
+                        <td style="width:80%" id="bbsize"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Vector Size</td>
+                        <td style="width:80%" id="vectorsize"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Vector Type</td>
+                        <td style="width:80%" id="vectortype"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Modifications to Backbone</td>
+                        <td style="width:80%" id="mod2bb"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Bacterial Resistance(s)</td>
+                        <td style="width:80%" id="bacre"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Growth Temperature</td>
+                        <td style="width:80%" id="temp"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Growth Strain(s)</td>
+                        <td style="width:80%" id="strain"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Copy number</td>
+                        <td style="width:80%" id="copynu"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Insert Name</td>
+                        <td style="width:80%" id="insertname"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Insert Type</td>
+                        <td style="width:80%" id="inserttype"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Insert Size</td>
+                        <td style="width:80%" id="insertsize"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Promoter</td>
+                        <td style="width:80%" id="prom"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Mutation</td>
+                        <td style="width:80%" id="mutation"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Tag</td>
+                        <td style="width:80%" id="tag"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">5'-primer</td>
+                        <td style="width:80%" id="pe5"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">3'-primer</td>
+                        <td style="width:80%" id="pe3"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Document Url</td>
+                        <td style="width:80%" id="documenturl"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Document</td>
+                        <td style="width:80%" id="document"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">License</td>
+                        <td style="width:80%" id="license"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">License Url</td>
+                        <td style="width:80%" id="licenseurl"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Cite</td>
+                        <td style="width:80%" id="cite"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Citeurl</td>
+                        <td style="width:80%" id="citeurl"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Citeit1</td>
+                        <td style="width:80%" id="citeit1"></td>
+                    </tr>
+                    <tr>
+                        <td stype="width:20%">Citeit2</td>
+                        <td style="width:80%" id="citeit2"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <script type="text/javascript">
+        // 列表
+        var List = {{ r|safe }};
+        document.getElementById('id').innerHTML = List['id']
+  document.getElementById('name').innerHTML = List['name']
+  document.getElementById('purpose').innerHTML = List['purpose']
+  document.getElementById('dplab').innerHTML = List['dplab']
+  document.getElementById('lablink').innerHTML = List['lablink']
+  document.getElementById('pub').innerHTML = List['pub']
+  document.getElementById('publink').innerHTML = List['publink']
+  document.getElementById('seqlink').innerHTML = List['seqlink']
+  document.getElementById('bbvector').innerHTML = List['bbvector']
+  document.getElementById('bbmanu').innerHTML = List['bbmanu']
+  document.getElementById('bbsize').innerHTML = List['bbsize']
+  document.getElementById('vectorsize').innerHTML = List['vectorsize']
+  document.getElementById('vectortype').innerHTML = List['vectortype']
+  document.getElementById('mod2bb').innerHTML = List['mod2bb']
+  document.getElementById('bacre').innerHTML = List['bacre']
+  document.getElementById('temp').innerHTML = List['temp']
+  document.getElementById('strain').innerHTML = List['strain']
+  document.getElementById('copynu').innerHTML = List['copynu']
+  document.getElementById('insertname').innerHTML = List['insertname']
+  document.getElementById('inserttype').innerHTML = List['inserttype']
+  document.getElementById('insertsize').innerHTML = List['insertsize']
+  document.getElementById('prom').innerHTML = List['prom']
+  document.getElementById('mutation').innerHTML = List['mutation']
+  document.getElementById('tag').innerHTML = List['tag']
+  document.getElementById('pe5').innerHTML = List['pe5']
+  document.getElementById('pe3').innerHTML = List['pe3']
+  document.getElementById('documenturl').innerHTML = List['documenturl']
+  document.getElementById('document').innerHTML = List['document']
+  document.getElementById('license').innerHTML = List['license']
+  document.getElementById('licenseurl').innerHTML = List['licenseurl']
+  document.getElementById('cite').innerHTML = List['cite']
+  document.getElementById('citeurl').innerHTML = List['citeurl']
+  document.getElementById('citeit1').innerHTML = List['citeit1']
+  document.getElementById('citeit2').innerHTML = List['citeit2']
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,1551 @@
+{% load staticfiles %}
+<!Doctype html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>PartData</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+    <script type="text/javascript" src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style type="text/css">
+        .dropdown-submenu {
+            position: relative;
+        }
+
+        .dropdown-submenu>.dropdown-menu {
+            top: 0;
+            left: 100%;
+            margin-top: -6px;
+            margin-left: -1px;
+            -webkit-border-radius: 0 6px 6px 6px;
+            -moz-border-radius: 0 6px 6px;
+            border-radius: 0 6px 6px 6px;
+        }
+
+        .dropdown-submenu:hover>.dropdown-menu {
+            display: block;
+        }
+
+        .dropdown-submenu>a:after {
+            display: block;
+            content: " ";
+            float: right;
+            width: 0;
+            height: 0;
+            border-color: transparent;
+            border-style: solid;
+            border-width: 5px 0 5px 5px;
+            border-left-color: #ccc;
+            margin-top: 5px;
+            margin-right: -10px;
+        }
+
+        .dropdown-submenu:hover>a:after {
+            border-left-color: #fff;
+        }
+
+        .dropdown-submenu.pull-left {
+            float: none;
+        }
+
+        .dropdown-submenu.pull-left>.dropdown-menu {
+            left: -100%;
+            margin-left: 10px;
+            -webkit-border-radius: 6px 0 6px 6px;
+            -moz-border-radius: 6px 0 6px 6px;
+            border-radius: 6px 0 6px 6px;
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'species/species.css'%}" />
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/bootstrap-select/css/bootstrap-select.min.css' %}">
+
+    <!--Fonts-->
+    <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <!--owl-carousel css-->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.carousel.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.theme.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.transitions.css' %}">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'bootstrap/css/color1.css' %}">
+    <script src="{% static 'bootstrap/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+    <script src="{% static 'bootstrap/bootstrap-select/js/bootstrap-select.min.js' %}"></script>
+</head>
+
+<body id="page-top" class="index" style="padding-top: 0px">
+
+    <header id="home" style="margin-bottom: 40px">
+        <!-- Navigation -->
+        <nav id="mainNav" class="navbar navbar-default-nothone navbar-custom navbar-fixed-top">
+            <div class="container">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav text-center">
+                        <li class="logo-holder">
+                            <a href="index.html">
+                                <img src="{% static 'bootstrap/images/logos/small-logo-light.png' %}" width='100'
+                                    height='35' style="margin-top:-15px"></a>
+                        </li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">DataBase</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'partdata' %}">PartData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'metadata' %}">MetaData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'plasmiddata' %}">Plasmid Data</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'tool1' %}">Smiles-drawer-2D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'tool3' %}">Smiles-drawer-3D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'mod2sbml' %}">mod to sbml</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'gemindex:gemindex' %}">Gemtract</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'prediction' %}">Prediction</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Information</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'species' %}">species</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'partinfo' %}">PartInfo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+        <br /><br /><br /><br />
+        <div>
+            <h1>
+                <img src="{% static 'bootstrap/images/logos/big-logo.jpg'%}" width='127.4' height='86.9'>
+                <br />
+                <h1>
+                    <font color=black>PHOSYME</font>
+                </h1>
+            </h1>
+        </div>
+        </nav>
+    </header>
+
+    <!-- HTML5 element support for IE6-8 -->
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <script type="text/javascript"
+    src="./Plant Metabolic Pathway Databases _ Plant Metabolic Network_files/jquery.min.js"></script>
+  <script type="text/javascript"
+    src="./Plant Metabolic Pathway Databases _ Plant Metabolic Network_files/jquery-extend-3.4.0.js"></script>
+</head>
+
+<body
+  class="html front not-logged-in one-sidebar sidebar-second page-data no-banner sff-7 slff-7 hff-7 pff-7 form-style-1"
+  style="">
+
+  <div id="species_tree" style="text-align: center">
+    <svg width="960px" height="2480px">
+      <g transform="translate(30,10)">
+        <path class="link" d="M 360, 68.49710982658962
+        H  0 V 153.1137984612085"></path>
+        <path class="link" d="M 22.50000000000002, 237.73048709582736
+        H  0 V 153.1137984612085"></path>
+        <path class="link" d="M 405, 31.213872832370043
+        H  360 V 68.49710982658962"></path>
+        <path class="link" d="M 382.5, 105.7803468208092
+        H  360 V 68.49710982658962"></path>
+        <path class="link" d="M 450, 180.34682080924858
+        H  22.50000000000002 V 237.73048709582736"></path>
+        <path class="link" d="M 44.99999999999999, 295.11415338240613
+        H  22.50000000000002 V 237.73048709582736"></path>
+        <path class="link" d="M 450, 13.872832369942216
+        H  405 V 31.213872832370043"></path>
+        <path class="link" d="M 427.5, 48.55491329479764
+        H  405 V 31.213872832370043"></path>
+        <path class="link" d="M 450, 83.23699421965307
+        H  382.5 V 105.7803468208092"></path>
+        <path class="link" d="M 405, 128.32369942196533
+        H  382.5 V 105.7803468208092"></path>
+        <path class="link" d="M 427.5, 215.028901734104
+        H  44.99999999999999 V 295.11415338240613"></path>
+        <path class="link" d="M 67.50000000000001, 375.199405030708
+        H  44.99999999999999 V 295.11415338240613"></path>
+        <path class="link" d="M 450, 41.61849710982665
+        H  427.5 V 48.55491329479764"></path>
+        <path class="link" d="M 450, 55.491329479768865
+        H  427.5 V 48.55491329479764"></path>
+        <path class="link" d="M 450, 110.9826589595375
+        H  405 V 128.32369942196533"></path>
+        <path class="link" d="M 427.5, 145.66473988439293
+        H  405 V 128.32369942196533"></path>
+        <path class="link" d="M 450, 208.0924855491329
+        H  427.5 V 215.028901734104"></path>
+        <path class="link" d="M 450, 221.96531791907512
+        H  427.5 V 215.028901734104"></path>
+        <path class="link" d="M 450, 249.71098265895955
+        H  67.50000000000001 V 375.199405030708"></path>
+        <path class="link" d="M 89.99999999999999, 500.6878274024566
+        H  67.50000000000001 V 375.199405030708"></path>
+        <path class="link" d="M 450, 138.72832369942194
+        H  427.5 V 145.66473988439293"></path>
+        <path class="link" d="M 450, 152.60115606936415
+        H  427.5 V 145.66473988439293"></path>
+        <path class="link" d="M 450, 277.45664739884387
+        H  89.99999999999999 V 500.6878274024566"></path>
+        <path class="link" d="M 112.5, 723.9190074060695
+        H  89.99999999999999 V 500.6878274024566"></path>
+        <path class="link" d="M 180, 347.34578215317924
+        H  112.5 V 723.9190074060695"></path>
+        <path class="link" d="M 135.00000000000003, 1100.4922326589594
+        H  112.5 V 723.9190074060695"></path>
+        <path class="link" d="M 427.5, 312.1387283236994
+        H  180 V 347.34578215317924"></path>
+        <path class="link" d="M 202.49999999999997, 382.55283598265896
+        H  180 V 347.34578215317924"></path>
+        <path class="link" d="M 450, 915.6069364161849
+        H  135.00000000000003 V 1100.4922326589594"></path>
+        <path class="link" d="M 157.5, 1285.377528901734
+        H  135.00000000000003 V 1100.4922326589594"></path>
+        <path class="link" d="M 450, 305.2023121387283
+        H  427.5 V 312.1387283236994"></path>
+        <path class="link" d="M 450, 319.0751445086705
+        H  427.5 V 312.1387283236994"></path>
+        <path class="link" d="M 450, 346.82080924855495
+        H  202.49999999999997 V 382.55283598265896"></path>
+        <path class="link" d="M 225, 418.284862716763
+        H  202.49999999999997 V 382.55283598265896"></path>
+        <path class="link" d="M 202.49999999999997, 1037.9493316473988
+        H  157.5 V 1285.377528901734"></path>
+        <path class="link" d="M 180, 1532.8057261560693
+        H  157.5 V 1285.377528901734"></path>
+        <path class="link" d="M 450, 374.5664739884394
+        H  225 V 418.284862716763"></path>
+        <path class="link" d="M 247.50000000000003, 462.0032514450868
+        H  225 V 418.284862716763"></path>
+        <path class="link" d="M 360, 968.4971098265896
+        H  202.49999999999997 V 1037.9493316473988"></path>
+        <path class="link" d="M 225, 1107.4015534682082
+        H  202.49999999999997 V 1037.9493316473988"></path>
+        <path class="link" d="M 427.5, 1435.8381502890174
+        H  180 V 1532.8057261560693"></path>
+        <path class="link" d="M 202.49999999999997, 1629.7733020231215
+        H  180 V 1532.8057261560693"></path>
+        <path class="link" d="M 450, 402.3121387283237
+        H  247.50000000000003 V 462.0032514450868"></path>
+        <path class="link" d="M 270, 521.6943641618498
+        H  247.50000000000003 V 462.0032514450868"></path>
+        <path class="link" d="M 450, 943.3526011560695
+        H  360 V 968.4971098265896"></path>
+        <path class="link" d="M 382.5, 993.6416184971099
+        H  360 V 968.4971098265896"></path>
+        <path class="link" d="M 450, 1068.208092485549
+        H  225 V 1107.4015534682082"></path>
+        <path class="link" d="M 247.50000000000003, 1146.595014450867
+        H  225 V 1107.4015534682082"></path>
+        <path class="link" d="M 450, 1428.9017341040462
+        H  427.5 V 1435.8381502890174"></path>
+        <path class="link" d="M 450, 1442.7745664739884
+        H  427.5 V 1435.8381502890174"></path>
+        <path class="link" d="M 450, 1470.5202312138729
+        H  202.49999999999997 V 1629.7733020231215"></path>
+        <path class="link" d="M 225, 1789.0263728323698
+        H  202.49999999999997 V 1629.7733020231215"></path>
+        <path class="link" d="M 450, 430.057803468208
+        H  270 V 521.6943641618498"></path>
+        <path class="link" d="M 292.5, 613.3309248554913
+        H  270 V 521.6943641618498"></path>
+        <path class="link" d="M 450, 971.0982658959538
+        H  382.5 V 993.6416184971099"></path>
+        <path class="link" d="M 405, 1016.1849710982659
+        H  382.5 V 993.6416184971099"></path>
+        <path class="link" d="M 427.5, 1102.8901734104047
+        H  247.50000000000003 V 1146.595014450867"></path>
+        <path class="link" d="M 270, 1190.2998554913295
+        H  247.50000000000003 V 1146.595014450867"></path>
+        <path class="link" d="M 292.5, 1610.2239884393064
+        H  225 V 1789.0263728323698"></path>
+        <path class="link" d="M 247.50000000000003, 1967.8287572254337
+        H  225 V 1789.0263728323698"></path>
+        <path class="link" d="M 360, 500.28901734104045
+        H  292.5 V 613.3309248554913"></path>
+        <path class="link" d="M 315, 726.3728323699422
+        H  292.5 V 613.3309248554913"></path>
+        <path class="link" d="M 450, 998.8439306358382
+        H  405 V 1016.1849710982659"></path>
+        <path class="link" d="M 427.5, 1033.5260115606936
+        H  405 V 1016.1849710982659"></path>
+        <path class="link" d="M 450, 1095.9537572254335
+        H  427.5 V 1102.8901734104047"></path>
+        <path class="link" d="M 450, 1109.8265895953757
+        H  427.5 V 1102.8901734104047"></path>
+        <path class="link" d="M 427.5, 1144.5086705202311
+        H  270 V 1190.2998554913295"></path>
+        <path class="link" d="M 292.5, 1236.0910404624278
+        H  270 V 1190.2998554913295"></path>
+        <path class="link" d="M 382.5, 1520.8092485549132
+        H  292.5 V 1610.2239884393064"></path>
+        <path class="link" d="M 315, 1699.6387283236993
+        H  292.5 V 1610.2239884393064"></path>
+        <path class="link" d="M 450, 1914.4508670520233
+        H  247.50000000000003 V 1967.8287572254337"></path>
+        <path class="link" d="M 270, 2021.206647398844
+        H  247.50000000000003 V 1967.8287572254337"></path>
+        <path class="link" d="M 450, 457.80346820809245
+        H  360 V 500.28901734104045"></path>
+        <path class="link" d="M 382.5, 542.7745664739884
+        H  360 V 500.28901734104045"></path>
+        <path class="link" d="M 360, 663.2947976878613
+        H  315 V 726.3728323699422"></path>
+        <path class="link" d="M 337.5, 789.4508670520231
+        H  315 V 726.3728323699422"></path>
+        <path class="link" d="M 450, 1026.5895953757226
+        H  427.5 V 1033.5260115606936"></path>
+        <path class="link" d="M 450, 1040.4624277456649
+        H  427.5 V 1033.5260115606936"></path>
+        <path class="link" d="M 450, 1137.5722543352601
+        H  427.5 V 1144.5086705202311"></path>
+        <path class="link" d="M 450, 1151.4450867052024
+        H  427.5 V 1144.5086705202311"></path>
+        <path class="link" d="M 405, 1196.5317919075144
+        H  292.5 V 1236.0910404624278"></path>
+        <path class="link" d="M 315, 1275.650289017341
+        H  292.5 V 1236.0910404624278"></path>
+        <path class="link" d="M 450, 1498.2658959537573
+        H  382.5 V 1520.8092485549132"></path>
+        <path class="link" d="M 405, 1543.3526011560693
+        H  382.5 V 1520.8092485549132"></path>
+        <path class="link" d="M 360, 1630.9248554913295
+        H  315 V 1699.6387283236993"></path>
+        <path class="link" d="M 337.5, 1768.3526011560693
+        H  315 V 1699.6387283236993"></path>
+        <path class="link" d="M 405, 1959.5375722543354
+        H  270 V 2021.206647398844"></path>
+        <path class="link" d="M 292.5, 2082.8757225433524
+        H  270 V 2021.206647398844"></path>
+        <path class="link" d="M 405, 502.8901734104046
+        H  382.5 V 542.7745664739884"></path>
+        <path class="link" d="M 405, 582.6589595375722
+        H  382.5 V 542.7745664739884"></path>
+        <path class="link" d="M 450, 638.150289017341
+        H  360 V 663.2947976878613"></path>
+        <path class="link" d="M 382.5, 688.4393063583815
+        H  360 V 663.2947976878613"></path>
+        <path class="link" d="M 450, 763.0057803468209
+        H  337.5 V 789.4508670520231"></path>
+        <path class="link" d="M 360, 815.8959537572254
+        H  337.5 V 789.4508670520231"></path>
+        <path class="link" d="M 450, 1179.1907514450866
+        H  405 V 1196.5317919075144"></path>
+        <path class="link" d="M 427.5, 1213.8728323699422
+        H  405 V 1196.5317919075144"></path>
+        <path class="link" d="M 450, 1248.5549132947976
+        H  315 V 1275.650289017341"></path>
+        <path class="link" d="M 337.5, 1302.7456647398844
+        H  315 V 1275.650289017341"></path>
+        <path class="link" d="M 450, 1526.0115606936417
+        H  405 V 1543.3526011560693"></path>
+        <path class="link" d="M 427.5, 1560.6936416184972
+        H  405 V 1543.3526011560693"></path>
+        <path class="link" d="M 427.5, 1602.3121387283236
+        H  360 V 1630.9248554913295"></path>
+        <path class="link" d="M 382.5, 1659.5375722543354
+        H  360 V 1630.9248554913295"></path>
+        <path class="link" d="M 450, 1734.1040462427745
+        H  337.5 V 1768.3526011560693"></path>
+        <path class="link" d="M 360, 1802.6011560693642
+        H  337.5 V 1768.3526011560693"></path>
+        <path class="link" d="M 450, 1942.1965317919075
+        H  405 V 1959.5375722543354"></path>
+        <path class="link" d="M 427.5, 1976.878612716763
+        H  405 V 1959.5375722543354"></path>
+        <path class="link" d="M 405, 2028.9017341040462
+        H  292.5 V 2082.8757225433524"></path>
+        <path class="link" d="M 315, 2136.849710982659
+        H  292.5 V 2082.8757225433524"></path>
+        <path class="link" d="M 450, 485.5491329479769
+        H  405 V 502.8901734104046"></path>
+        <path class="link" d="M 427.5, 520.2312138728324
+        H  405 V 502.8901734104046"></path>
+        <path class="link" d="M 427.5, 561.849710982659
+        H  405 V 582.6589595375722"></path>
+        <path class="link" d="M 427.5, 603.4682080924856
+        H  405 V 582.6589595375722"></path>
+        <path class="link" d="M 450, 665.8959537572254
+        H  382.5 V 688.4393063583815"></path>
+        <path class="link" d="M 405, 710.9826589595375
+        H  382.5 V 688.4393063583815"></path>
+        <path class="link" d="M 450, 790.7514450867052
+        H  360 V 815.8959537572254"></path>
+        <path class="link" d="M 382.5, 841.0404624277456
+        H  360 V 815.8959537572254"></path>
+        <path class="link" d="M 450, 1206.9364161849712
+        H  427.5 V 1213.8728323699422"></path>
+        <path class="link" d="M 450, 1220.8092485549132
+        H  427.5 V 1213.8728323699422"></path>
+        <path class="link" d="M 450, 1276.300578034682
+        H  337.5 V 1302.7456647398844"></path>
+        <path class="link" d="M 360, 1329.1907514450868
+        H  337.5 V 1302.7456647398844"></path>
+        <path class="link" d="M 450, 1553.757225433526
+        H  427.5 V 1560.6936416184972"></path>
+        <path class="link" d="M 450, 1567.6300578034682
+        H  427.5 V 1560.6936416184972"></path>
+        <path class="link" d="M 450, 1595.3757225433524
+        H  427.5 V 1602.3121387283236"></path>
+        <path class="link" d="M 450, 1609.2485549132948
+        H  427.5 V 1602.3121387283236"></path>
+        <path class="link" d="M 450, 1636.9942196531792
+        H  382.5 V 1659.5375722543354"></path>
+        <path class="link" d="M 405, 1682.0809248554913
+        H  382.5 V 1659.5375722543354"></path>
+        <path class="link" d="M 427.5, 1768.7861271676302
+        H  360 V 1802.6011560693642"></path>
+        <path class="link" d="M 382.5, 1836.4161849710983
+        H  360 V 1802.6011560693642"></path>
+        <path class="link" d="M 450, 1969.942196531792
+        H  427.5 V 1976.878612716763"></path>
+        <path class="link" d="M 450, 1983.815028901734
+        H  427.5 V 1976.878612716763"></path>
+        <path class="link" d="M 450, 2011.5606936416184
+        H  405 V 2028.9017341040462"></path>
+        <path class="link" d="M 427.5, 2046.242774566474
+        H  405 V 2028.9017341040462"></path>
+        <path class="link" d="M 450, 2080.9248554913297
+        H  315 V 2136.849710982659"></path>
+        <path class="link" d="M 337.5, 2192.7745664739887
+        H  315 V 2136.849710982659"></path>
+        <path class="link" d="M 450, 513.2947976878613
+        H  427.5 V 520.2312138728324"></path>
+        <path class="link" d="M 450, 527.1676300578034
+        H  427.5 V 520.2312138728324"></path>
+        <path class="link" d="M 450, 554.9132947976879
+        H  427.5 V 561.849710982659"></path>
+        <path class="link" d="M 450, 568.7861271676301
+        H  427.5 V 561.849710982659"></path>
+        <path class="link" d="M 450, 596.5317919075144
+        H  427.5 V 603.4682080924856"></path>
+        <path class="link" d="M 450, 610.4046242774566
+        H  427.5 V 603.4682080924856"></path>
+        <path class="link" d="M 450, 693.6416184971099
+        H  405 V 710.9826589595375"></path>
+        <path class="link" d="M 427.5, 728.3236994219653
+        H  405 V 710.9826589595375"></path>
+        <path class="link" d="M 450, 818.4971098265896
+        H  382.5 V 841.0404624277456"></path>
+        <path class="link" d="M 405, 863.5838150289018
+        H  382.5 V 841.0404624277456"></path>
+        <path class="link" d="M 450, 1304.0462427745663
+        H  360 V 1329.1907514450868"></path>
+        <path class="link" d="M 382.5, 1354.3352601156068
+        H  360 V 1329.1907514450868"></path>
+        <path class="link" d="M 450, 1664.7398843930634
+        H  405 V 1682.0809248554913"></path>
+        <path class="link" d="M 427.5, 1699.421965317919
+        H  405 V 1682.0809248554913"></path>
+        <path class="link" d="M 450, 1761.849710982659
+        H  427.5 V 1768.7861271676302"></path>
+        <path class="link" d="M 450, 1775.7225433526012
+        H  427.5 V 1768.7861271676302"></path>
+        <path class="link" d="M 427.5, 1810.4046242774566
+        H  382.5 V 1836.4161849710983"></path>
+        <path class="link" d="M 405, 1862.4277456647399
+        H  382.5 V 1836.4161849710983"></path>
+        <path class="link" d="M 450, 2039.3063583815028
+        H  427.5 V 2046.242774566474"></path>
+        <path class="link" d="M 450, 2053.1791907514453
+        H  427.5 V 2046.242774566474"></path>
+        <path class="link" d="M 450, 2108.6705202312137
+        H  337.5 V 2192.7745664739887"></path>
+        <path class="link" d="M 360, 2164.1618497109826
+        H  337.5 V 2192.7745664739887"></path>
+        <path class="link" d="M 360, 2305.491329479769
+        H  337.5 V 2192.7745664739887"></path>
+        <path class="link" d="M 450, 721.3872832369942
+        H  427.5 V 728.3236994219653"></path>
+        <path class="link" d="M 450, 735.2601156069364
+        H  427.5 V 728.3236994219653"></path>
+        <path class="link" d="M 450, 846.2427745664739
+        H  405 V 863.5838150289018"></path>
+        <path class="link" d="M 427.5, 880.9248554913295
+        H  405 V 863.5838150289018"></path>
+        <path class="link" d="M 450, 1331.7919075144507
+        H  382.5 V 1354.3352601156068"></path>
+        <path class="link" d="M 405, 1376.878612716763
+        H  382.5 V 1354.3352601156068"></path>
+        <path class="link" d="M 450, 1692.4855491329479
+        H  427.5 V 1699.421965317919"></path>
+        <path class="link" d="M 450, 1706.3583815028903
+        H  427.5 V 1699.421965317919"></path>
+        <path class="link" d="M 450, 1803.4682080924854
+        H  427.5 V 1810.4046242774566"></path>
+        <path class="link" d="M 450, 1817.3410404624278
+        H  427.5 V 1810.4046242774566"></path>
+        <path class="link" d="M 450, 1845.0867052023123
+        H  405 V 1862.4277456647399"></path>
+        <path class="link" d="M 427.5, 1879.7687861271677
+        H  405 V 1862.4277456647399"></path>
+        <path class="link" d="M 450, 2136.416184971098
+        H  360 V 2164.1618497109826"></path>
+        <path class="link" d="M 382.5, 2191.907514450867
+        H  360 V 2164.1618497109826"></path>
+        <path class="link" d="M 450, 2275.1445086705203
+        H  360 V 2305.491329479769"></path>
+        <path class="link" d="M 382.5, 2335.8381502890174
+        H  360 V 2305.491329479769"></path>
+        <path class="link" d="M 450, 873.9884393063584
+        H  427.5 V 880.9248554913295"></path>
+        <path class="link" d="M 450, 887.8612716763006
+        H  427.5 V 880.9248554913295"></path>
+        <path class="link" d="M 450, 1359.5375722543354
+        H  405 V 1376.878612716763"></path>
+        <path class="link" d="M 427.5, 1394.2196531791906
+        H  405 V 1376.878612716763"></path>
+        <path class="link" d="M 450, 1872.8323699421965
+        H  427.5 V 1879.7687861271677"></path>
+        <path class="link" d="M 450, 1886.705202312139
+        H  427.5 V 1879.7687861271677"></path>
+        <path class="link" d="M 450, 2164.1618497109826
+        H  382.5 V 2191.907514450867"></path>
+        <path class="link" d="M 405, 2219.6531791907514
+        H  382.5 V 2191.907514450867"></path>
+        <path class="link" d="M 427.5, 2309.8265895953755
+        H  382.5 V 2335.8381502890174"></path>
+        <path class="link" d="M 405, 2361.849710982659
+        H  382.5 V 2335.8381502890174"></path>
+        <path class="link" d="M 450, 1387.2832369942198
+        H  427.5 V 1394.2196531791906"></path>
+        <path class="link" d="M 450, 1401.1560693641618
+        H  427.5 V 1394.2196531791906"></path>
+        <path class="link" d="M 427.5, 2198.843930635838
+        H  405 V 2219.6531791907514"></path>
+        <path class="link" d="M 427.5, 2240.4624277456646
+        H  405 V 2219.6531791907514"></path>
+        <path class="link" d="M 450, 2302.8901734104047
+        H  427.5 V 2309.8265895953755"></path>
+        <path class="link" d="M 450, 2316.7630057803467
+        H  427.5 V 2309.8265895953755"></path>
+        <path class="link" d="M 450, 2344.508670520231
+        H  405 V 2361.849710982659"></path>
+        <path class="link" d="M 427.5, 2379.190751445087
+        H  405 V 2361.849710982659"></path>
+        <path class="link" d="M 450, 2191.907514450867
+        H  427.5 V 2198.843930635838"></path>
+        <path class="link" d="M 450, 2205.7803468208094
+        H  427.5 V 2198.843930635838"></path>
+        <path class="link" d="M 450, 2233.526011560694
+        H  427.5 V 2240.4624277456646"></path>
+        <path class="link" d="M 450, 2247.398843930636
+        H  427.5 V 2240.4624277456646"></path>
+        <path class="link" d="M 450, 2372.2543352601156
+        H  427.5 V 2379.190751445087"></path>
+        <path class="link" d="M 450, 2386.1271676300576
+        H  427.5 V 2379.190751445087"></path>
+         <g class="node node--internal mouse-crosshair" transform="translate(0, 153.11380004882812)"
+          id="idx-Viridiplantae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Viridiplantae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 68.49710845947266)"
+          id="idx-Chlorophyta">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Chlorophyta</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(22.5, 237.73048400878906)"
+          id="idx-Embryophyta">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Embryophyta</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 31.2138729095459)"
+          id="idx-Mamiellophyceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Mamiellophyceae</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(382.5, 105.78034973144531)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 180.34681701660156)" id="idx-Marchantia polymorpha">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mpolymorphacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Marchantia polymorpha (Common liverwort)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(45, 295.1141662597656)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 13.872832298278809)" id="idx-Ostreococcus lucimarinus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'olucimarinuscyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Ostreococcus lucimarinus</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 48.55491256713867)"
+          id="idx-Micromonas">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Micromonas</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 83.23699188232422)"
+          id="idx-Coccomyxa subellipsoidea C-169">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'csubellipsoideacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Coccomyxa subellipsoidea C-169</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 128.32369995117188)"
+          id="idx-Chlorophyceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Chlorophyceae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 215.02890014648438)"
+          id="idx-Bryophyta">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Bryophyta</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(67.5, 375.19940185546875)"
+          id="idx-Tracheophyta">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Tracheophyta</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 41.61849594116211)" id="idx-Micromonas pusilla CCMP1545">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mpusillacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Micromonas pusilla CCMP1545</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 55.491329193115234)" id="idx-Micromonas commoda RCC299">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mcommodacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Micromonas commoda RCC299</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 110.98265838623047)" id="idx-Chromochloris zofingiensis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'czofingiensiscyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Chromochloris zofingiensis</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 145.66473388671875)"
+          id="idx-Chlamydomonadales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle"
+              cursor="pointer">Chlamydomonadales</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 208.0924835205078)" id="idx-Sphagnum fallax">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'sfallaxcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Sphagnum fallax (Flat-topped bogmoss)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 221.96531677246094)" id="idx-Physcomitrella patens">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mosscyc' %}" target="_blank"><text class=" text--link" y=".35em" x="13"
+              text-anchor="start" cursor="pointer">Physcomitrella patens</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 249.7109832763672)" id="idx-Selaginella moellendorffii">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'selaginellacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Selaginella moellendorffii</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(90, 500.6878356933594)"
+          id="idx-Magnoliophyta">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Magnoliophyta</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 138.7283172607422)" id="idx-Volvox carteri">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'vcartericyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Volvox carteri</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 152.6011505126953)" id="idx-Chlamydomonas reinhardtii">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'chlamycyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Chlamydomonas reinhardtii</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 277.4566345214844)" id="idx-Amborella trichopoda">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'amborellacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Amborella trichopoda</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(112.5, 723.9190063476562)"
+          id="idx-Mesangiospermae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Mesangiospermae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(180, 347.3457946777344)"
+          id="idx-Liliopsida">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Liliopsida</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(135, 1100.4921875)" id="idx-Eudicotyledons">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Eudicotyledons</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 312.13873291015625)"
+          id="idx-Alismatales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Alismatales</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(202.5, 382.5528259277344)"
+          id="idx-Petrosaviidae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Petrosaviidae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 915.60693359375)" id="idx-Aquilegia coerulea">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'acoeruleacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Aquilegia coerulea (Colorado blue columbine)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(157.5, 1285.3775634765625)"
+          id="idx-Gunneridae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Gunneridae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 305.2023010253906)" id="idx-Spirodela polyrhiza">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'spirodelacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Spirodela polyrhiza (Common duckweed)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 319.07513427734375)" id="idx-Zostera marina">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'zmarinacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Zostera marina (Common eelgrass)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 346.82080078125)" id="idx-Dioscorea rotundata">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'drotundatacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Dioscorea rotundata (White yam)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(225, 418.28485107421875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(202.5, 1037.9493408203125)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(180, 1532.8057861328125)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 374.56646728515625)" id="idx-Asparagus officinalis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'asparaguscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Asparagus officinalis (Asparagus)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(247.5, 462.0032653808594)"
+          id="idx-Commelinids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Commelinids</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 968.4971313476562)"
+          id="idx-Caryophyllales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Caryophyllales</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(225, 1107.401611328125)" id="idx-Asterids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Asterids</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1435.838134765625)"
+          id="idx-Kalanchoe">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Kalanchoe</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(202.5, 1629.7733154296875)" id="idx-Rosids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Rosids</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 402.3121337890625)" id="idx-Musa acuminata">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'bananacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Musa acuminata (Banana)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(270, 521.6943359375)" id="idx-Poales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Poales</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 943.3526000976562)" id="idx-Dianthus caryophyllus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'carnationcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Dianthus caryophyllus (Carnation)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 993.6416015625)"
+          id="idx-Amaranthaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Amaranthaceae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1068.2081298828125)" id="idx-Camptotheca acuminata">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cacuminatacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Camptotheca acuminata</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(247.5, 1146.594970703125)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1428.9017333984375)" id="idx-Kalanchoe laxiflora">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'klaxifloracyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Kalanchoe laxiflora</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1442.7745361328125)" id="idx-Kalanchoe fedtschenkoi">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'kfedtschenkoicyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Kalanchoe fedtschenkoi</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1470.520263671875)" id="idx-Vitis vinifera">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'grapecyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Vitis vinifera (Grape)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(225, 1789.0263671875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 430.05780029296875)" id="idx-Ananas comosus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'pineapplecyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Ananas comosus (Pineapple)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(292.5, 613.3309326171875)" id="idx-Poaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Poaceae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 971.0982666015625)" id="idx-Amaranthus hypochondriacus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'ahypochondriacuscyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Amaranthus hypochondriacus (Prince-of-Wales
+              feather)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(405, 1016.1849975585938)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1102.89013671875)"
+          id="idx-Campanulids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Campanulids</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(270, 1190.2998046875)" id="idx-lamiids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">lamiids</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(292.5, 1610.2239990234375)" id="idx-fabids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">fabids</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(247.5, 1967.8287353515625)"
+          id="idx-Malvids">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Malvids</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 500.2890319824219)"
+          id="idx-PACMAD clade">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">PACMAD clade</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(315, 726.372802734375)" id="idx-BOP clade">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">BOP clade</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 998.8439331054688)" id="idx-Beta vulgaris subsp. vulgaris">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'sugarbeetcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Beta vulgaris subsp. vulgaris (Sugarbeet)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1033.5260009765625)"
+          id="idx-Chenopodioideae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Chenopodioideae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1095.9537353515625)" id="idx-Helianthus annuus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'sunflowercyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Helianthus annuus (Sunflower)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1109.8265380859375)" id="idx-Daucus carota subsp. sativus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'carrotcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Daucus carota subsp. sativus (Carrot)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1144.5086669921875)"
+          id="idx-Apocynaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Apocynaceae</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(292.5, 1236.091064453125)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 1520.8092041015625)"
+          id="idx-Malpighiales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Malpighiales</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(315, 1699.638671875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1914.450927734375)" id="idx-Eucalyptus grandis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'egrandiscyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Eucalyptus grandis (Flooded gum)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(270, 2021.2066650390625)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 457.803466796875)" id="idx-Oropetium thomaeum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'othomaeumcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Oropetium thomaeum</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 542.7745361328125)"
+          id="idx-Panicoideae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Panicoideae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 663.2947998046875)" id="idx-Pooideae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Pooideae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(337.5, 789.4508666992188)"
+          id="idx-Oryzinae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Oryzinae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1026.589599609375)" id="idx-Spinacia oleracea">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'soleraceacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Spinacia oleracea (Spinach)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1040.46240234375)" id="idx-Chenopodium quinoa">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'quinoacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Chenopodium quinoa (Quinoa)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1137.572265625)" id="idx-Catharanthus roseus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'croseuscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Catharanthus roseus (Rose periwinkle)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1151.445068359375)" id="idx-Calotropis gigantea">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cgiganteacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Calotropis gigantea (Giant milkweed)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 1196.53173828125)" id="idx-Lamiales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Lamiales</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(315, 1275.6502685546875)"
+          id="idx-Solanaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Solanaceae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1498.265869140625)" id="idx-Populus trichocarpa">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'poplarcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Populus trichocarpa (Poplar)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(405, 1543.3526611328125)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 1630.9248046875)" id="idx-Fabaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Fabaceae</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(337.5, 1768.3526611328125)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 1959.53759765625)" id="idx-Sapindales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Sapindales</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(292.5, 2082.875732421875)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 502.8901672363281)"
+          id="idx-Andropogonae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Andropogonae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 582.658935546875)" id="idx-Paniceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Paniceae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 638.1502685546875)" id="idx-Brachypodium distachyon">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'brachypodiumcyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Brachypodium distachyon (Purple false
+              brome)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 688.4393310546875)"
+          id="idx-Triticeae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Triticeae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 763.0057983398438)" id="idx-Leersia perrieri">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'lperriericyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Leersia perrieri</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 815.8959350585938)" id="idx-Oryza">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Oryza</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1179.1907958984375)"
+          id="idx-Olea europaea var. sylvestris">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'oeuropaea_sylvestriscyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Olea europaea var. sylvestris (Wild
+              olive)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(427.5, 1213.872802734375)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1248.554931640625)" id="idx-Petunia axillaris">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'paxillariscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Petunia axillaris (Petunia)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(337.5, 1302.74560546875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1526.0115966796875)" id="idx-Linum usitatissimum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'flaxcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Linum usitatissimum (Flax)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1560.693603515625)"
+          id="idx-Euphorbiaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Euphorbiaceae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1602.3121337890625)"
+          id="idx-Phaseoleae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Phaseoleae</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(382.5, 1659.53759765625)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1734.10400390625)" id="idx-Cucumis sativus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cucumbercyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Cucumis sativus (Cucumber)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 1802.6011962890625)" id="idx-Rosales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Rosales</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1942.196533203125)" id="idx-Anacardium occidentale">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cashewcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Anacardium occidentale (Cashew)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1976.878662109375)" id="idx-Citrus">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Citrus</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 2028.9017333984375)"
+          id="idx-Malvaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Malvaceae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(315, 2136.849609375)" id="idx-Brassicales">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Brassicales</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 485.54913330078125)" id="idx-Zea mays subsp. mays">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'corncyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Zea mays subsp. mays (Corn)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(427.5, 520.231201171875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 561.8497314453125)" id="idx-Panicum">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Panicum</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 603.4682006835938)" id="idx-Setaria">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Setaria</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 665.8959350585938)"
+          id="idx-Hordeum vulgare subsp. vulgare">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'barleycyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Hordeum vulgare subsp. vulgare (Barley)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 710.982666015625)" id="idx-Triticinae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Triticinae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 790.75146484375)" id="idx-Oryza brachyantha">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'obrachyanthacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Oryza brachyantha</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(382.5, 841.0404663085938)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1206.9364013671875)" id="idx-Salvia miltiorrhiza">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'redsagecyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Salvia miltiorrhiza (Red sage)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1220.8092041015625)" id="idx-Mimulus guttatus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mguttatuscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Mimulus guttatus (Seep monkeyflower)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1276.300537109375)" id="idx-Nicotiana tabacum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'ntabacumtn90cyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Nicotiana tabacum (Tobacco)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(360, 1329.1907958984375)"
+          id="idx-Solanoideae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Solanoideae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1553.7572021484375)" id="idx-Manihot esculenta">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cassavacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Manihot esculenta (Cassava)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1567.6300048828125)" id="idx-Ricinus communis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'castorbeancyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Ricinus communis (Castor bean)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1595.375732421875)" id="idx-Glycine max">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'soycyc' %}" target="_blank"><text class=" text--link" y=".35em" x="13"
+              text-anchor="start" cursor="pointer">Glycine max (Soy)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1609.24853515625)" id="idx-Phaseolus vulgaris">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'commonbeancyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Phaseolus vulgaris (Common bean)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1636.9942626953125)" id="idx-Lotus japonicus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'ljaponicuscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Lotus japonicus</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(405, 1682.0809326171875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1768.7861328125)"
+          id="idx-Cannabaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Cannabaceae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 1836.4161376953125)"
+          id="idx-Rosaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Rosaceae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1969.942138671875)" id="idx-Citrus clementina">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'clementinecyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Citrus clementina (Clementine)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1983.8150634765625)" id="idx-Citrus sinensis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'sweetorangecyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Citrus sinensis (Sweet orange)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2011.5606689453125)" id="idx-Gossypium raimondii">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'graimondiicyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Gossypium raimondii (Cotton)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(427.5, 2046.2427978515625)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2080.9248046875)" id="idx-Carica papaya">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'papayacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Carica papaya (Papaya)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(337.5, 2192.774658203125)"
+          id="idx-Brassicaceae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--visable" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Brassicaceae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 513.2947998046875)" id="idx-Miscanthus sinensis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'msinensiscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Miscanthus sinensis (Chinese silvergrass)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 527.1676025390625)" id="idx-Sorghum bicolor">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'sorghumbicolorcyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Sorghum bicolor (Sorghum)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 554.9132690429688)" id="idx-Panicum virgatum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'switchgrasscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Panicum virgatum (Switchgrass)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 568.7861328125)" id="idx-Panicum hallii">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'phalliicyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Panicum hallii (Hall's panicgrass)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 596.5317993164062)" id="idx-Setaria viridis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'sviridiscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Setaria viridis (Wild foxtail millet)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 610.4046020507812)" id="idx-Setaria italica">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'setariacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Setaria italica (Foxtail millet)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 693.6416015625)" id="idx-Aegilops tauschii">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'wheatdcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Aegilops tauschii (Goatgrass)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 728.3236694335938)"
+          id="idx-Triticum">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Triticum</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 818.4971313476562)" id="idx-Oryza punctata">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'opunctatacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Oryza punctata</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(405, 863.5838012695312)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1304.0462646484375)" id="idx-Capsicum annuum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cannuumcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Capsicum annuum (Pepper)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 1354.335205078125)" id="idx-Solanum">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Solanum</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1664.7398681640625)" id="idx-Cicer arietinum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'carietinumicc4958cyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Cicer arietinum (Chickpea)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1699.4219970703125)"
+          id="idx-Trifolieae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Trifolieae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1761.8497314453125)" id="idx-Humulus lupulus var. lupulus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'hopcyc' %}" target="_blank"><text class=" text--link" y=".35em" x="13"
+              text-anchor="start" cursor="pointer">Humulus lupulus var. lupulus (Hop)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1775.7225341796875)" id="idx-Cannabis sativa">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'csativapkcyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Cannabis sativa</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1810.4046630859375)"
+          id="idx-Amygdaloideae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Amygdaloideae</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 1862.427734375)" id="idx-Rosoideae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Rosoideae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2039.306396484375)" id="idx-Theobroma cacao">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cocoacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Theobroma cacao (Cocoa)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2053.17919921875)" id="idx-Corchorus capsularis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'ccapsulariscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Corchorus capsularis (White jute)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2108.67041015625)" id="idx-Thellungiella parvula">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'tparvulacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Thellungiella parvula</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(360, 2164.161865234375)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(360, 2305.4912109375)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 721.3872680664062)" id="idx-Triticum urartu">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'wheatacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Triticum urartu</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 735.2601318359375)" id="idx-Triticum aestivum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'breadwheatcyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Triticum aestivum (Bread wheat)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 846.2427978515625)" id="idx-Oryza sativa Japonica Group">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'oryzacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Oryza sativa Japonica Group (Rice)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(427.5, 880.9248657226562)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1331.7918701171875)" id="idx-Solanum melongena">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'eggplantcyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Solanum melongena (Eggplant)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(405, 1376.878662109375)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1692.485595703125)" id="idx-Medicago truncatula">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mtruncatulacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Medicago truncatula (Barrelclover)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1706.3583984375)" id="idx-Trifolium pratense">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'redclovercyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Trifolium pratense (Red clover)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1803.46826171875)" id="idx-Prunus persica">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'ppersicacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Prunus persica (Peach)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1817.341064453125)" id="idx-Malus domestica">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'mdomesticacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Malus domestica (Apple)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1845.086669921875)" id="idx-Fragaria vesca subsp. vesca">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'fvescavescacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Fragaria vesca subsp. vesca (Woodland strawberry)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1879.768798828125)" id="idx-Rosa">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Rosa</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2136.416259765625)" id="idx-Eutrema salsugineum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'esalsugineumcyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Eutrema salsugineum</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 2191.907470703125)"
+          id="idx-Brassica">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Brassica</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2275.14453125)" id="idx-Boechera stricta">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'bstrictacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Boechera stricta</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(382.5, 2335.838134765625)"
+          id="idx-Camelineae">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Camelineae</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 873.9884643554688)" id="idx-Oryza rufipogon">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'orufipogoncyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Oryza rufipogon</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 887.8612670898438)" id="idx-Oryza glaberrima">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'oglaberrimacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Oryza glaberrima</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1359.53759765625)" id="idx-Solanum tuberosum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'potatocyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Solanum tuberosum (Potato)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 1394.2196044921875)"
+          id="idx-Lycopersicon">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Lycopersicon</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1872.8323974609375)" id="idx-Rosa multiflora">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'rmultifloracyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Rosa multiflora (Multiflora rose)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1886.7052001953125)" id="idx-Rosa chinensis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'rchinensiscyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Rosa chinensis (Chinese rose)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2164.161865234375)" id="idx-Brassica napus">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'oilseedrapecyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Brassica napus (Oilseed rape)</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(405, 2219.653076171875)" id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 2309.82666015625)" id="idx-Capsella">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Capsella</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(405, 2361.849609375)" id="idx-Arabidopsis">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Arabidopsis</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1387.283203125)" id="idx-Solanum pennellii">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'spennelliicyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Solanum pennellii (Wild tomato)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 1401.1561279296875)" id="idx-Solanum lycopersicum">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'tomatocyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Solanum lycopersicum (Tomato)</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 2198.843994140625)"
+          id="idx-Brassica oleracea">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Brassica
+              oleracea</text></a>
+        </g>
+        <g class="node node--internal mouse-crosshair" transform="translate(427.5, 2240.46240234375)"
+          id="idx-Brassica rapa">
+          <circle class="node node--internal mouse-crosshair" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer">Brassica rapa</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2302.89013671875)" id="idx-Capsella grandiflora">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'cgrandifloracyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Capsella grandiflora</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2316.762939453125)" id="idx-Capsella rubella">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'crubellacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Capsella rubella</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2344.5087890625)" id="idx-Arabidopsis thaliana col">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'aracyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Arabidopsis thaliana col</text></a>
+        </g>
+        <g class="node node--invisible mouse-default" transform="translate(427.5, 2379.190673828125)"
+          id="idx-undefined">
+          <circle class="node node--invisible mouse-default" r="3" cursor="pointer"></circle><a target="_blank"><text
+              class=" text--internal" y="-1.0em" x="13" text-anchor="middle" cursor="pointer"></text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2191.907470703125)"
+          id="idx-Brassica oleracea var. capitata">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'boleraceacapitatacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Brassica oleracea var. capitata (Cabbage)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2205.7802734375)" id="idx-Brassica oleracea var. oleracea">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'boleraceaoleraceacyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Brassica oleracea var. oleracea (Wild
+              cabbage)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2233.526123046875)"
+          id="idx-Brassica rapa subsp. pekinensis">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'chinesecabbagecyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Brassica rapa subsp. pekinensis (Chinese
+              cabbage)</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2247.39892578125)" id="idx-Brassica rapa FPsc">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'brapafpsccyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Brassica rapa FPsc</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2372.25439453125)" id="idx-Arabidopsis lyrata">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'alyratacyc' %}" target="_blank"><text class=" text--link" y=".35em"
+              x="13" text-anchor="start" cursor="pointer">Arabidopsis lyrata</text></a>
+        </g>
+        <g class="node node--leaf" transform="translate(450, 2386.127197265625)" id="idx-Arabidopsis halleri">
+          <circle class="node node--leaf" r="3" cursor="pointer"></circle><a
+            href="{% url 'species-info' 'ahallericyc' %}" target="_blank"><text class=" text--link"
+              y=".35em" x="13" text-anchor="start" cursor="pointer">Arabidopsis halleri</text></a>
+        </g>
+      
+
+       </g>
+    </svg>
+  </div>
+
+
+  <script type="text/javascript">
+    src="{% static 'species/d3.v4.min.js' %}"></script>
+  <script type="text/javascript"
+    src="{% static 'species/webtree.js' %}"></script>
+
+    <script type="text/javascript">
+
+
+        $('.dropdown li a').click(function () {
+
+            console.log(this);
+            title = $(this).attr("data-title");
+            id = $(this).attr("data-index");
+            $("#select-title").text(title);
+            $("#category_id").val(id);
+        })
+
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $(".dropdown").mouseover(function () {
+                $(this).addClass("open");
+            });
+
+            $(".dropdown").mouseleave(function () {
+                $(this).removeClass("open");
+            })
+
+        })
+    </script>
+</body>
+
+</html>

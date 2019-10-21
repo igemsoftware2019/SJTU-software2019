@@ -1,0 +1,149 @@
+{% load staticfiles %}
+<html>
+
+<head>
+    <title>Awesome SMILES 3D</title>
+
+
+	
+	
+
+	
+	
+	
+	<!--Fonts-->
+	<link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{% static 'gemtractor/webfonts/fonts.css' %}" type="text/css" />
+	
+
+	<!--owl-carousel css-->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.carousel.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.theme.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.transitions.css' %}">
+	<!--        <link rel="stylesheet"  href="css/animations.css">-->
+	<link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/main.css' %}">
+	<link rel="stylesheet" href="{% static 'bootstrap/css/color1.css' %}">
+
+	<script src="{% static 'bootstrap/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/main.js' %}"></script>
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Product+Sans|Roboto|Roboto+Mono|Work+Sans" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" >
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/2.4.85/css/materialdesignicons.min.css">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'smiles-3d/style.css' %}">
+
+
+</head>
+
+<body>
+
+	<header id="home" class="intro-text main-banner" >
+		<!-- Navigation -->
+		<nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+			<div class="container">
+				<!-- Collect the nav links, forms, and other content for toggling -->
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav text-center">
+						<li class="logo-holder">
+							<a href="{% url 'index' %}">
+								<img src="{% static 'bootstrap/images/logos/small-logo-light.png' %}" width='100' height='35' style="margin-top:-15px"></a>
+						</li>
+						<li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">DataBase</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'partdata' %}">PartData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'metadata' %}">MetaData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'plasmiddata' %}">Plasmid Data</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'tool1' %}">Smiles-drawer-2D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'tool3' %}">Smiles-drawer-3D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'mod2sbml' %}">mod to sbml</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'gemindex:gemindex' %}">Gemtract</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'prediction' %}">Prediction</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Information</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'species' %}">species</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'partinfo' %}">PartInfo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
+					</ul>
+				</div>
+				<!-- /.navbar-collapse -->
+			</div>
+			<!-- /.container-fluid -->
+		</nav>
+
+
+	</header>
+
+    <div class="container">
+        <h1 style="font-family: Helvetica Neue">Awesome molecule SMILES to 3D</h1>
+        <div class="smile-form">
+            <form>
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Place your SMILES</span>
+                        </div>
+                        <textarea id="smile-field" class="form-control" placeholder="For example, CCO, OCC and C(O)C" aria-label="With textarea">O=C(Oc1ccccc1C(=O)O)C</textarea>
+                    </div>
+                    <small class="form-text text-muted">For example: Caffeine CN1C=NC2=C1C(=O)N(C(=O)N2C)C </small>
+                    <small class="form-text text-muted">For example: Dopamine C1=CC(=C(C=C1CCN)O)O.Cl</small>
+                </div>
+                <button id="smile-button" type="submit" class="btn btn-primary">Visualize!</button>
+            </form>
+        </div>
+        <div id="error-alert" class="alert alert-danger mdi mdi-skull" role="alert"></div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div id="render-container" class="col-lg-8">
+                <canvas id="renderer-canvas"></canvas>
+            </div>
+            <div class="col-lg-4">
+                <nav>
+                    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                        <a class="nav-item nav-link active" id="nav-ctab-tab" data-toggle="tab" href="#nav-ctab" role="tab" aria-controls="nav-ctab"
+                            aria-selected="true">CTAB</a>
+                        <a class="nav-item nav-link" id="nav-xyz-tab" data-toggle="tab" href="#nav-xyz" role="tab" aria-controls="nav-xyz" aria-selected="false">XYZ</a>
+                        <a class="nav-item nav-link" id="nav-smile-tab" data-toggle="tab" href="#nav-smile" role="tab" aria-controls="nav-smile"
+                            aria-selected="false">SMILE</a>
+                    </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                    <div class="tab-pane fade show active" id="nav-ctab" role="tabpanel" aria-labelledby="nav-ctab-tab">
+                        <span class="molecule-tab-content" id="ctab-text"></span>
+                    </div>
+                    <div class="tab-pane fade" id="nav-xyz" role="tabpanel" aria-labelledby="nav-xyz-tab">
+                        <span class="molecule-tab-content" id="xyz-text"></span>
+                    </div>
+                    <div class="tab-pane fade" id="nav-smile" role="tabpanel" aria-labelledby="nav-smile-tab">
+                        <span class="molecule-tab-content" id="smiles-text"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
+        crossorigin="anonymous"></script>
+    <script src="{% static 'smiles-3d/bundle.js' %}"></script>
+    <script src="{% static 'smiles-3d/index.js' %}"></script>
+</body>
+
+</html>

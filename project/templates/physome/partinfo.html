@@ -1,0 +1,178 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>PartInfo</title>
+	<script src="{% static 'bootstrap/js/vendor/jquery.js' %}"></script>
+	
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    
+	<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="{% static 'bootstrap/bootstrap-table/bootstrap-table.js' %}"></script>
+    <link href="{% static 'bootstrap/bootstrap-table/bootstrap-table.css' %}" rel="stylesheet" />
+</head>
+<body>
+	<div class="panel-body no-padding" style="margin-top: 50px;margin-left: 100px;margin-right:200px ">
+        <table class="table table-striped table-condensed table-bordered" id="table" style="table-layout:fixed;word-break:break-all; word-wrap:break-all;text-align: center">
+            <tbody id="tbody">
+                <caption style="font-size:16px">Result</caption>
+            	<tr>
+            		<td style="width:20%">ID</td>
+            		<td style="width:80%" id="id"></td>
+            	</tr>
+            	<tr>
+            		<td style="width:20%">Team ID</td>
+            		<td style="width:80%" id="teamid"></td>
+            	</tr>
+            	<tr>
+                    <td style="width:20%">Team Name</td>
+                    <td style="width:80%" id="teamname"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Team Description</td>
+                    <td style="width:80%" id="teamdescription"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Team title </td>
+                    <td style="width:80%" id="teamtitle"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Team keywords</td>
+                    <td style="width:80%" id="teamkeywords"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Team Judging Form</td>
+                    <td style="width:80%" id="teamjudingform"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">iGEM-id</td>
+                    <td style="width:80%" id="igemid"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Description</td>
+                    <td style="width:80%" id="description"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">iGEM-link</td>
+                    <td style="width:80%" id="igemlink"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Type</td>
+                    <td style="width:80%" id="type"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Sequence</td>
+                    <td style="width:80%" id="sequence"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Sample Status</td>
+                    <td style="width:80%" id="samplestatus"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Uses</td>
+                    <td style="width:80%" id="uses"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Twin</td>
+                    <td style="width:80%" id="twin"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Nickname</td>
+                    <td style="width:80%" id="nickname"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Designer</td>
+                    <td style="width:80%" id="designer"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Categories</td>
+                    <td style="width:80%" id="categories"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">ProteinCodingSequences ID</td>
+                    <td style="width:80%" id="prid"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">ProteinCodingSequences function</td>
+                    <td style="width:80%" id="prfunction"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">ProteinCodingSequences uniport</td>
+                    <td style="width:80%" id="pruniport"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">ProteinCodingSequences KEGG</td>
+                    <td style="width:80%" id="prkegg"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">ProteinCodingSequences Biology</td>
+                    <td style="width:80%" id="prbiology"></td>
+                </tr>
+                 <tr>
+                    <td style="width:20%">ProteinCodingSequences Direction</td>
+                    <td style="width:80%" id="prdirection"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">ProteinCodingSequences Tag</td>
+                    <td style="width:80%" id="prtag"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Function</td>
+                    <td style="width:80%" id="function"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Prbs</td>
+                    <td style="width:80%" id="prbs"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Promoters</td>
+                    <td style="width:80%" id="promoters"></td>
+                </tr>
+                <tr>
+                    <td style="width:20%">Terminators</td>
+                    <td style="width:80%" id="terminators"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+    // 列表
+    var List = {{ r|safe }};
+
+    document.getElementById('id').innerHTML = List['id'];
+    document.getElementById('teamname').innerHTML = List['team']['name']
+    document.getElementById('teamid').innerHTML = List['team']['id']
+    document.getElementById('teamdescription').innerHTML = List['team']['description']
+    document.getElementById('teamtitle').innerHTML = List['team']['title']
+    document.getElementById('teamkeywords').innerHTML = List['team']['keywords']
+    document.getElementById('teamjudingform').innerHTML = List['team']['judging_form']
+    document.getElementById('igemid').innerHTML = List['igem_id']
+    document.getElementById('description').innerHTML = List['description']
+    document.getElementById('igemlink').innerHTML = List['igem_link']
+    document.getElementById('type').innerHTML = List['type']
+    document.getElementById('sequence').innerHTML = List['sequence']
+    document.getElementById('samplestatus').innerHTML = List['sample_status']
+    document.getElementById('uses').innerHTML = List['uses']
+    document.getElementById('twin').innerHTML = List['twin']
+    document.getElementById('nickname').innerHTML = List['nickname']
+    document.getElementById('designer').innerHTML = List['designer']
+    document.getElementById('categories').innerHTML = List['categories']
+    document.getElementById('prid').innerHTML = List['proteinCodingSequences']['id']
+    document.getElementById('prfunction').innerHTML = List['proteinCodingSequences']['function']
+    document.getElementById('pruniport').innerHTML = List['proteinCodingSequences']['uniport']
+    document.getElementById('prkegg').innerHTML = List['proteinCodingSequences']['kegg']
+    document.getElementById('prbiology').innerHTML = List['proteinCodingSequences']['biology']
+    document.getElementById('prdirection').innerHTML = List['proteinCodingSequences']['direction']
+    document.getElementById('prtag').innerHTML = List['ProteinCodingSequences']['tag']
+    document.getElementById('function').innerHTML = List['functions']
+    document.getElementById('prbs').innerHTML = List['prbs']
+    document.getElementById('promoters').innerHTML = List['promoters']
+    document.getElementById('reporters').innerHTML = List['reporters']
+    document.getElementById('terminators').innerHTML = List['terminators']
+
+
+</script>
+</body>
+</html>

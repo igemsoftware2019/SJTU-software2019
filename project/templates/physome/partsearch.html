@@ -1,0 +1,120 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SearchResult</title>
+
+    <!-- <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script> -->
+	<script src="{% static 'bootstrap/js/vendor/jquery.js' %}"></script>
+	
+    <script src="{% static 'bootstrap/js/bootstrap.js' %}"></script>
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet" />
+    
+	<script src="https://unpkg.com/bootstrap-table@1.15.5/dist/bootstrap-table.min.js"></script>
+    <script src="{% static 'bootstrap/bootstrap-table/bootstrap-table.js' %}"></script>
+    <link href="{% static 'bootstrap/bootstrap-table/bootstrap-table.css' %}" rel="stylesheet" />
+
+</head>
+<body>
+    <header id="home" class="intro-text main-banner" >
+        <!-- Navigation -->
+        <nav id="mainNav" class="navbar navbar-default navbar-custom navbar-fixed-top">
+            <div class="container">
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav text-center">
+                        <li class="logo-holder">
+                            <a href="{% url 'index' %}">
+                                <img src="{% static 'bootstrap/images/logos/small-logo-light.png' %}" width='100' height='35' style="margin-top:-15px"></a>
+                        </li>
+                        <li><a href="{% url 'index' %}">Home</a></li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">DataBase</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'partdata' %}">PartData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'metadata' %}">MetaData</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'plasmiddata' %}">Plasmid Data</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Tools</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'tool1' %}">Smiles-drawer-2D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'tool3' %}">Smiles-drawer-3D</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'mod2sbml' %}">mod to sbml</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'gemindex:gemindex' %}">Gemtract</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'prediction' %}">Prediction</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown">Information</a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li style="margin-left: 30px"><a href="{% url 'species' %}">species</a></li>
+                                <li style="margin-left: 30px"><a href="{% url 'partinfo' %}">PartInfo</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="{% url 'help' %}">Help</a></li>
+                    </ul>
+                </div>
+                <!-- /.navbar-collapse -->
+            </div>
+            <!-- /.container-fluid -->
+        </nav>
+    </header>
+	<div class="panel-body no-padding" style="margin-top: 50px;margin-left: 75px;margin-right:75px ">
+        <table class="table table-striped" id="table">
+            <thead>
+                <tr style="font-family:Arial">
+                    <th>ID</th>
+                    <th id="x">iGEM id </th>
+                    <th>Name</th>
+                    <th>Team Name</th>
+					<th>Team Title</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody id="tbody">
+            </tbody>
+        </table>
+    </div>
+</table>
+
+</body>
+<script type="text/javascript">
+    // 列表
+    var List = {{ r|safe }};
+
+    function addRow(row1,row2,row3,row4,row5,row6,row7){
+    //添加行
+    var newTr = tbody.insertRow();
+    //添加列
+    var newTd1 = newTr.insertCell();
+    var newTd2 = newTr.insertCell();
+    var newTd3 = newTr.insertCell();
+    var newTd4 = newTr.insertCell();
+    var newTd5 = newTr.insertCell();
+    var newTd6 = newTr.insertCell();
+    var newTd7 = newTr.insertCell();
+    //设置列内容和属性
+    newTd1.innerText = row1;
+    newTd2.innerText = row2;
+    newTd3.innerText = row3;
+    newTd4.innerText = row4;
+    newTd5.innerText = row5;
+    newTd6.innerText = row6;
+    newTd7.innerText = row7;
+    newTd1.setAttribute('id',row1)
+	}
+    for(i in List){
+        addRow(List[i]['id'],List[i]['igem_id'],List[i]['nickname'],List[i]['team']['name'],List[i]['team']['title'],List[i]['type'],List[i]['description']);// i为索引
+    }
+</script>
+    <script type="text/javascript">
+		$("td[id]").wrapInner("<a></a>")
+		$("td[id]").each(function(){
+			var url = "../partinfo/"+$(this).text()
+			console.log($(this).text())
+            // console.log($("this").children("a").text())
+			$(this).children("a").attr("href",url)
+		})
+	</script>
+</html>

@@ -1,0 +1,52 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>met2sbml</title>
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+        <link rel="stylesheet" href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" />
+        <script type="text/javascript" src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="apple-touch-icon" href="apple-touch-icon.png">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+        <!--Fonts-->
+        <link href='https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700' rel='stylesheet' type='text/css'>
+        <!--owl-carousel css-->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.carousel.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.theme.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/owl-carousel/owl.transitions.css' %}">
+        <!--        <link rel="stylesheet"  href="css/animations.css">-->
+        <link rel="stylesheet" href="{% static 'bootstrap/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/main.css' %}">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/color1.css' %}">
+        <script src="{% static 'bootstrap/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js' %}"></script>
+</head>
+<body id="page-top" class="index" style="padding-top: 50px">
+
+
+<div class="htmleaf-container">
+    <div class="container kv-main">
+        <div class="page-header">
+            <h2>Select file or type it</h2>
+        </div>
+         <form id="uploadForm" enctype="multipart/form-data" method="POST" action="{% url 'sbml' %}">{% csrf_token %}
+		<input id="file" name="file" type="file" class="file" accept=".mod" data-show-preview="false">
+        <!-- <form enctype="multipart/form-data"> -->
+            <br>
+        <input type="submit" class="btn btn-default" value="Convert" ></button>
+        </form>
+</div>
+</div>
+
+<div class="container">
+<h3> <font style="margin-left: 15px" id="Resulttitle">{{ Result }}</font></h3>
+<button><a href="{% static 'upload/tmp.xml'%}" download="result.xml">{{ button }}</a></button>
+</div>
+
+
+</body>
+</html>
